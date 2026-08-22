@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node / build tooling (if ever added)
+node_modules/
+dist/
+build/
+npm-debug.log*
+yarn-error.log*
+.cache/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Netlify CLI local state
+.netlify/

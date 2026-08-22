@@ -1,0 +1,10 @@
+# IKAG Capital — static single-file site.
+# This file is authoritative: it overrides the Netlify UI build settings and
+# suppresses framework auto-detection, so linking the repo cannot introduce a
+# build command that breaks the deploy.
+
+[build]
+  # No build step. The site is plain HTML with inline CSS/JS.
+  command = ""
+  # Publish the repository root as-is.
+  publish = "."

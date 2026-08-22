@@ -1,0 +1,10 @@
+# Normalize text files to LF in the repo so diffs stay clean across machines.
+* text=auto eol=lf
+
+# Explicitly binary — never line-ending converted.
+*.png binary
+*.ico binary
+*.jpg binary
+*.jpeg binary
+*.woff binary
+*.woff2 binary
