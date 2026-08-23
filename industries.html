@@ -276,6 +276,11 @@
     .process-step:last-child { border-bottom: none; }
     .verticals-header { flex-direction: column; }
   }
+
+  /* 9-card grid: stack on mobile */
+  @media (max-width: 900px) {
+    section#industries > div[style*="repeat(3, 1fr)"] { grid-template-columns: 1fr !important; max-width: none !important; }
+  }
 </style>
 <link rel="icon" type="image/png" href="favicon.png" />
 <link rel="shortcut icon" href="favicon.ico" />
@@ -318,7 +323,7 @@
 </section>
 <section id="industries" style="background: linear-gradient(180deg, var(--purple-deep) 0%, #0F0D1E 100%);">
   
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; margin-top: 32px; background: rgba(139,92,246,0.12);">
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 32px; background: rgba(139,92,246,0.12); max-width: 1400px; margin-left: auto; margin-right: auto;">
 
     <div style="background: rgba(26,8,60,0.7); padding: 28px 24px; border-top: 2px solid rgba(107,56,204,0.25);">
       <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px; color: #F7F4EE;">Multifamily</div>
