@@ -276,6 +276,12 @@
     .process-step:last-child { border-bottom: none; }
     .verticals-header { flex-direction: column; }
   }
+
+  /* Event card responsive */
+  @media (max-width: 780px) {
+    .event-card { grid-template-columns: 1fr !important; padding: 28px !important; gap: 24px !important; }
+    .event-details { border-left: none !important; border-top: 1px solid var(--border) !important; padding-left: 0 !important; padding-top: 24px !important; }
+  }
 </style>
 <link rel="icon" type="image/png" href="favicon.png" />
 <link rel="shortcut icon" href="favicon.ico" />
@@ -317,10 +323,46 @@
   </div>
 </section>
 <section id="events" style="background: var(--bg-2);">
-  <div class="section-label">Events</div>
-  <h2>Coming Soon.</h2>
-  <p style="font-size:15px; font-weight:300; color:var(--text-secondary); max-width:640px; line-height:1.8; margin-top:14px; margin-bottom: 24px;">We are building out our events calendar for industry conferences, sponsor roundtables, capital markets briefings, and networking gatherings across our markets. Check back soon or reach out to be added to our announcement list.</p>
-  <a href="#contact" class="btn-ghost" style="display:inline-block; margin-top:14px;">Get In Touch</a>
+  <div class="section-label">Upcoming Event</div>
+  <h2>Link &amp; Clink.</h2>
+  <p style="font-size:15px; font-weight:300; color:var(--text-secondary); max-width:640px; line-height:1.8; margin-top:14px;">Our upcoming networking event in Pittsburgh. Knowing everyone does not close the deal. Knowing who can solve your problem does. Wear your ask, and they find you.</p>
+
+  <div class="event-card" style="margin-top: 40px; max-width: 900px; background: var(--bg-card); border: 1px solid var(--border); border-top: 3px solid var(--gold); padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+
+    <div>
+      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--purple-accent); margin-bottom: 12px;">IKAG Networking Event</div>
+      <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 28px; font-weight: 700; line-height: 1.15; color: var(--text-primary); margin-bottom: 20px;">Link &amp; Clink</h3>
+      <p style="font-size: 14px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px;">A curated Pittsburgh networking event bringing together sponsors, developers, brokers, capital partners, and operators from across the commercial real estate community. Come with your ask. Leave with the connection.</p>
+      <a href="https://www.eventbrite.com/e/ikag-networking-event-link-clink-tickets-1998026417801?aff=oddtdtcreator" target="_blank" rel="noopener" style="display: inline-block; padding: 14px 36px; background: var(--gold); color: var(--navy); text-decoration: none; border-radius: 2px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.2s;">RSVP on Eventbrite</a>
+    </div>
+
+    <div class="event-details" style="border-left: 1px solid var(--border); padding-left: 40px;">
+
+      <div style="margin-bottom: 24px;">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 6px;">Date</div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700; color: var(--text-primary);">Tuesday, September 22, 2026</div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 6px;">Time</div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700; color: var(--text-primary);">3:00 PM to 6:30 PM</div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 6px;">Location</div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; color: var(--text-primary); line-height: 1.5;">2350 Railroad Street<br />Pittsburgh, PA 15222</div>
+      </div>
+
+      <div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 6px;">Format</div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; color: var(--text-primary);">In-person</div>
+      </div>
+
+    </div>
+  </div>
+
+  <p style="font-size: 13px; font-weight: 300; color: var(--text-muted); margin-top: 32px; max-width: 640px; line-height: 1.75; font-style: italic;">Additional events, industry conferences, sponsor roundtables, and capital markets briefings are being scheduled. Check back or reach out to be added to our announcement list.</p>
+
 </section><!-- BOTTOM CTA -->
 <section style="background: linear-gradient(160deg, var(--purple-deep) 0%, #0D0A20 100%); text-align: center; padding: 48px 5%; position: relative;">
   <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 100%, rgba(196,151,42,0.08) 0%, transparent 55%); pointer-events: none;"></div>
