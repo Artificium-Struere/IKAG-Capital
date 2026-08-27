@@ -297,6 +297,25 @@
     .nav-links li:last-child a { border-bottom: none; }
     .nav-cta { display: block; text-align: center; margin-top: 14px; padding: 13px 18px !important; font-size: 12px !important; border-radius: 2px; }
   }
+
+  /* card grids: the final row always stretches to fill, so no orphan gaps */
+  .card-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; margin-top: 32px; background: var(--border); max-width: 1400px; margin-left: auto; margin-right: auto; }
+  .card-grid > * { grid-column: span 2; }
+  .card-grid > *:nth-last-child(2):nth-child(3n+1),
+  .card-grid > *:nth-last-child(1):nth-child(3n+2) { grid-column: span 3; }
+  .card-grid > *:nth-last-child(1):nth-child(3n+1) { grid-column: span 6; }
+  @media (max-width: 1200px) {
+    .card-grid { grid-template-columns: repeat(2, 1fr); }
+    .card-grid > *,
+    .card-grid > *:nth-last-child(2):nth-child(3n+1),
+    .card-grid > *:nth-last-child(1):nth-child(3n+2),
+    .card-grid > *:nth-last-child(1):nth-child(3n+1) { grid-column: auto; }
+    .card-grid > *:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  }
+  @media (max-width: 900px) {
+    .card-grid { grid-template-columns: 1fr; max-width: none; }
+    .card-grid > *, .card-grid > *:last-child:nth-child(odd) { grid-column: 1; }
+  }
 </style>
 <link rel="icon" type="image/png" href="favicon.png" />
 <link rel="shortcut icon" href="favicon.ico" />
@@ -360,7 +379,7 @@
 <section style="background: var(--bg); padding: 48px 5%;">
   <div class="section-label">What We Do</div>
   <h2>Capital Origination<br />End-to-End.</h2>
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; margin-top: 32px; background: var(--border);">
+  <div class="card-grid">
 
     <a href="financing.html" style="text-decoration:none; display:block; background: var(--bg-card); padding: 32px 28px; border-top: 2px solid var(--purple-accent); transition: box-shadow 0.2s;">
       <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Financing Solutions &rarr;</div>

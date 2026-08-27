@@ -185,6 +185,7 @@
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 32px; }
   .about-text p { font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.9; margin-bottom: 20px; }
   .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .team-grid > *:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .team-card { background: var(--bg-card); border: 1px solid var(--border); border-top: 3px solid var(--purple-accent); padding: 28px 24px; }
   .team-name { font-family: "Plus Jakarta Sans", sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 4px; color: var(--text-primary); }
   .team-role { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 12px; }
