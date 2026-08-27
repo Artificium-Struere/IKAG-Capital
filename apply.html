@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sponsor Services | IKAG Capital</title>
-<meta name="description" content="Fractional deal team, institutional-grade financial modeling, and investor-ready presentation services for real estate sponsors preparing capital raises." />
+<title>Apply for Financing | IKAG Capital</title>
+<meta name="description" content="Apply for unsecured financing through IKAG Capital. Underwriting happens on a call, not off a plan code. Submit a client and the application opens in a new tab." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -277,6 +277,16 @@
     .verticals-header { flex-direction: column; }
   }
 
+  /* 9-card grid: stack on mobile */
+  @media (max-width: 900px) {
+    section#financing > div[style*="repeat(3, 1fr)"] { grid-template-columns: 1fr !important; max-width: none !important; }
+  }
+
+  /* inline form validation */
+  .field-error { display: none; font-size: 11px; font-weight: 500; color: #B4402F; margin-top: 6px; letter-spacing: 0.02em; }
+  .field.has-error .field-error { display: block; }
+  .field.has-error input, .field.has-error select, .field.has-error textarea { border-color: #B4402F; }
+
   /* mobile menu */
   .nav-toggle { display: none; background: none; border: 0; padding: 10px 0; cursor: pointer; color: rgba(255,255,255,0.75); }
   .nav-toggle span { display: block; width: 24px; height: 2px; background: currentColor; border-radius: 2px; }
@@ -319,11 +329,11 @@
   <ul class="nav-links" id="nav-links">
     <li><a href="financing.html">Financing</a></li>
     <li><a href="advisory.html">Advisory</a></li>
-    <li><a href="sponsor-services.html" style="color: var(--gold-bright);">Sponsors</a></li>
+    <li><a href="sponsor-services.html">Sponsors</a></li>
     <li><a href="industries.html">Industries</a></li>
     <li><a href="about.html">Team</a></li>
     <li><a href="events.html">Events</a></li>
-    <li><a href="apply.html">Apply</a></li>
+    <li><a href="apply.html" style="color: var(--gold-bright);">Apply</a></li>
     <li><a href="contact.html" class="nav-cta">Contact</a></li>
   </ul>
   <button class="nav-toggle" type="button" aria-label="Menu" aria-controls="nav-links" onclick="toggleNav()"><span></span><span></span><span></span></button>
@@ -334,66 +344,123 @@
   <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), var(--purple-bright), transparent); opacity: 0.5;"></div>
   <div style="position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(107,56,204,0.35) 0%, transparent 70%); filter: blur(80px); top: -20%; right: -8%; pointer-events: none;"></div>
   <div style="position: relative; z-index: 2; max-width: 900px;">
-    <div style="display: inline-flex; align-items: center; gap: 10px; padding: 7px 16px; border: 1px solid rgba(196,151,42,0.35); border-radius: 99px; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; background: rgba(196,151,42,0.07);">Sponsor Services</div>
-    <h1 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(32px, 4.5vw, 56px); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; color: #F7F4EE; margin-bottom: 20px;">Support That Goes<br />Beyond Placement.</h1>
-    <p style="font-size: 16px; font-weight: 300; color: rgba(247,244,238,0.65); max-width: 640px; line-height: 1.75;">Institutional-grade deal preparation for real estate sponsors. When you need a targeted deliverable or ongoing deal team support, we operate as an integrated extension of your investment platform.</p>
-  </div>
-</section>
-<section id="sponsor-services" style="background: var(--bg-card);">
-  
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; margin-top: 32px; background: var(--border);">
-
-    <div style="background: var(--bg); padding: 28px 24px; border-top: 2px solid var(--purple-accent);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Fractional Deal Team</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Embedded, on-demand execution support for underwriting, investment analysis, and capital raise initiatives. Investment team expertise without the cost, complexity, or long-term commitment of full-time employees.</p>
-    </div>
-
-    <div style="background: var(--bg); padding: 28px 24px; border-top: 2px solid var(--gold);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Financial Modeling</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Dynamic, institutional-grade financial models providing the clarity and rigor needed to support acquisitions, developments, repositionings, and capital raises. Tailored, audit-ready, built to drive confident investment decisions.</p>
-    </div>
-
-    <div style="background: var(--bg); padding: 28px 24px; border-top: 2px solid var(--purple-accent);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Presentation Services</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Investor-ready presentations that clearly articulate complex investment opportunities. From offering memorandums to capital raise pitchbooks, materials built to secure buy-in from lenders, partners, and equity investors.</p>
-    </div>
-
-  </div>
-
-  <div style="margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px;">
-
-    <div>
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple-accent); margin-bottom: 14px;">Asset Classes Supported</div>
-      <p style="font-size: 14px; font-weight: 400; color: var(--text-secondary); line-height: 1.9;">Multifamily &middot; Mixed-Use &middot; Industrial &middot; Retail &middot; Hospitality &middot; Single-Family Rental &middot; Self-Storage &middot; Office &middot; Manufactured Housing &middot; Condominiums</p>
-    </div>
-
-    <div>
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple-accent); margin-bottom: 14px;">Who We Work With</div>
-      <p style="font-size: 14px; font-weight: 400; color: var(--text-secondary); line-height: 1.9;">Developers &middot; Syndicators &middot; Family Offices &middot; Private Equity Funds &middot; General Partners &middot; Asset Managers &middot; JV Partnerships &middot; Emerging Sponsors</p>
-    </div>
-
-    <div>
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 14px;">Investment Strategies</div>
-      <p style="font-size: 14px; font-weight: 400; color: var(--text-secondary); line-height: 1.9;">Core &middot; Core-Plus &middot; Value-Add &middot; Opportunistic</p>
-    </div>
-
-    <div>
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 14px;">Capital Stack Coverage</div>
-      <p style="font-size: 14px; font-weight: 400; color: var(--text-secondary); line-height: 1.9;">Senior Debt &middot; Mezzanine Financing &middot; Preferred Equity &middot; Common Equity</p>
-    </div>
-
-  </div>
-</section><!-- BOTTOM CTA -->
-<section style="background: linear-gradient(160deg, var(--purple-deep) 0%, #0D0A20 100%); text-align: center; padding: 48px 5%; position: relative;">
-  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 100%, rgba(196,151,42,0.08) 0%, transparent 55%); pointer-events: none;"></div>
-  <div style="position: relative; z-index: 1;">
-    <div style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px;">Get In Touch</div>
-    <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: #F7F4EE; margin-bottom: 12px;">Let&rsquo;s Discuss Your Transaction.</h2>
-    <p style="font-size: 15px; font-weight: 300; color: rgba(247,244,238,0.55); max-width: 480px; margin: 0 auto 28px; line-height: 1.75;">Reach our origination team to submit a mandate, discuss a transaction, or understand how we structure capital placements.</p>
-    <a href="contact.html" style="display: inline-block; padding: 14px 36px; background: var(--gold); color: var(--navy); text-decoration: none; border-radius: 2px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">Contact Us</a>
+    <div style="display: inline-flex; align-items: center; gap: 10px; padding: 7px 16px; border: 1px solid rgba(196,151,42,0.35); border-radius: 99px; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; background: rgba(196,151,42,0.07);">Apply</div>
+    <h1 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(32px, 4.5vw, 56px); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; color: #F7F4EE; margin-bottom: 20px;">Apply for Financing</h1>
   </div>
 </section>
 
+<!-- UNSECURED FINANCING -->
+<section id="unsecured" style="background: var(--bg);">
+  <div style="max-width: 900px;">
+    <div class="section-label">Unsecured</div>
+    <h2>Unsecured Financing</h2>
+    <p style="font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px; margin-top: 20px;">Unsecured financing is capital that is not tied to a property. No collateral, no appraisal, no lien on real estate. The file moves on credit strength and documented income rather than on an asset, which means it is not waiting on an appraiser or a title company.</p>
+
+    <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 700; color: var(--text-primary); margin: 44px 0 14px; line-height: 1.3;">What you are actually being sold everywhere else</div>
+    <p style="font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px;">Most home improvement financing runs on plan codes. The contractor picks a number off a menu and that number locks the term, the promotional rate, and the fee before anyone has looked at the borrower.</p>
+    <p style="font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px;">The fee is the part nobody says out loud. A zero percent offer to the homeowner is not free. Somebody bought it down, and that somebody is the contractor, out of the job. On the plans contractors actually use to close, that cost runs well into the double digits of the job price. It comes out of the margin or it goes into the bid, which means the homeowner paid for their own zero percent in the price instead of the rate.</p>
+    <p style="font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px;">The promotional structures carry a tail. Deferred interest means that if the balance is not cleared inside the promotional window, interest can be charged back to day one on the full original amount. The customer who was sold zero percent finds out in month thirteen.</p>
+    <p style="font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px;">And the code is fixed the day it is written. If the job does not fit a code, there is nothing to discuss, because there is nobody to discuss it with.</p>
+
+    <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 700; color: var(--text-primary); margin: 44px 0 14px; line-height: 1.3;">How we work instead</div>
+    <p style="font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px;">No plan codes. No dealer fee buying down a teaser rate. No menu deciding your terms before anyone has read the file.</p>
+    <p style="font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px;">Underwriting happens on a call. A person looks at the situation and builds around it.</p>
+    <p style="font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px;">Sometimes the rate is the answer. More often it is the term, and a menu cannot give you that.</p>
+
+    <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 700; color: var(--text-primary); margin: 44px 0 14px; line-height: 1.3;">Where we can get creative</div>
+    <ul class="form-perks" style="margin-top: 18px;">
+      <li>Term length, and how the payment is shaped around real cash flow</li>
+      <li>Payment timing, including when the first payment lands relative to the job</li>
+      <li>How the financing is sized against the scope of work</li>
+      <li>Whether the borrower is the business or the customer</li>
+      <li>Files a rigid credit box would decline on a technicality rather than on substance</li>
+    </ul>
+
+    <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 700; color: var(--text-primary); margin: 44px 0 14px; line-height: 1.3;">Two ways to use it</div>
+  </div>
+
+  <div class="what-grid" style="margin-top: 18px; gap: 2px; background: var(--border);">
+    <div style="background: var(--bg-card); padding: 28px 24px; border-top: 2px solid var(--purple-accent);">
+      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">For your business</div>
+      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Working capital that is not tied to a property and does not touch your equipment or your receivables. Contractors, roofers, HVAC and other trades, and service businesses use it for payroll, materials, crews, and growth.</p>
+      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75; margin-top: 12px;">General program guidelines: a personal credit score of 680 or better across all three bureaus, and two years of personal tax returns showing $50,000 or more in taxable income. No collateral, no down payment, no upfront fees, and no prepayment penalty. No minimum time in business.</p>
+    </div>
+    <div style="background: var(--bg-card); padding: 28px 24px; border-top: 2px solid var(--purple-accent);">
+      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">For your customer</div>
+      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Financing for the homeowner on the other side of the job, structured on a call instead of picked off a code list. If a file does not fit a standard box, that is the start of the conversation, not the end of it.</p>
+    </div>
+  </div>
+
+  <div style="max-width: 900px;">
+    <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 700; color: var(--text-primary); margin: 44px 0 14px; line-height: 1.3;">What this is not</div>
+    <p style="font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px;">This is not a mortgage and it is not secured by real estate. If you are financing a property acquisition, a refinance, or a ground-up project, start with our <a href="financing.html" style="color: var(--purple-accent); text-decoration: none; border-bottom: 1px solid rgba(107,56,204,0.35);">financing solutions</a> instead.</p>
+
+    <p style="font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px; margin-top: 28px; padding: 18px 20px; background: var(--purple-pale); border-left: 2px solid var(--purple-accent);">Brookmont Capital Ventures is our preferred funding partner. Applications are reviewed and funded through their unsecured funding program.</p>
+  </div>
+</section>
+
+<!-- REP INTAKE FORM -->
+<section id="submit">
+  <div class="section-label">Rep Intake</div>
+  <h2>Submit a Client</h2>
+  <div class="form-grid">
+    <div>
+      <div class="form-left-headline">Submit a client</div>
+      <p class="form-left-text">Reps, enter your client&rsquo;s details here. On submit, the application opens in a new tab and we take it from there.</p>
+    </div>
+
+    <div>
+      <form id="referral-form" action="https://script.google.com/a/macros/ikag.capital/s/AKfycbzNkVhPSq2V26l_3PBVcEpU5GJ7Rg8I5W8b0XubkBFDekZYBQ-Z3YjLE1sau0T0S8W6Sg/exec" method="POST" target="ikag_sink" novalidate>
+        <input type="hidden" name="formType" value="unsecured-referral" />
+        <div class="field">
+          <label for="clientName">Client Name</label>
+          <input type="text" id="clientName" name="clientName" data-required autocomplete="off" />
+          <span class="field-error">Please enter the client&rsquo;s name.</span>
+        </div>
+        <div class="field">
+          <label for="clientPhone">Client Phone</label>
+          <input type="tel" id="clientPhone" name="clientPhone" data-required autocomplete="off" />
+          <span class="field-error">Please enter the client&rsquo;s phone number.</span>
+        </div>
+        <div class="field">
+          <label for="clientCompany">Client Company</label>
+          <input type="text" id="clientCompany" name="clientCompany" data-required autocomplete="off" />
+          <span class="field-error">Please enter the client&rsquo;s company.</span>
+        </div>
+        <div class="field">
+          <label for="reason">Reason for Financing</label>
+          <input type="text" id="reason" name="reason" data-required autocomplete="off" />
+          <span class="field-error">Please enter the reason for financing.</span>
+        </div>
+        <div class="field">
+          <label for="repName">Your Name</label>
+          <input type="text" id="repName" name="repName" data-required autocomplete="off" />
+          <span class="field-error">Please enter your name.</span>
+        </div>
+        <div class="field">
+          <label for="repEmail">Your Email</label>
+          <input type="email" id="repEmail" name="repEmail" data-required autocomplete="off" />
+          <span class="field-error">Please enter a valid email address.</span>
+        </div>
+        <div class="field field-full">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Submit and continue to application</button>
+      </form>
+
+      <div id="referral-thanks" class="form-success">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px;">Thank you</div>
+        <p style="font-size: 14px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Your client has been submitted. The application is opening in a new tab. We will call <span id="thanks-client-name">your client</span> shortly, and a copy of these details is on its way to your inbox.</p>
+        <p style="margin-top: 14px; font-size: 13px;"><a href="https://preferredfundinggroup.wufoo.com/forms/m11357i31o9c893/" target="_blank" rel="noopener noreferrer" style="color: var(--purple-accent); text-decoration: none; border-bottom: 1px solid rgba(107,56,204,0.35);">If the application did not open, click here to open it</a></p>
+      </div>
+    </div>
+  </div>
+
+  <p style="max-width: 900px; margin-top: 40px; font-size: 11px; font-weight: 300; color: var(--text-light); line-height: 1.7;">All financing is subject to underwriting and credit approval. Program guidelines are not an offer and not a commitment to lend. Terms vary by applicant. Consumer financing, where offered, is provided through our funding partner and subject to applicable consumer lending requirements.</p>
+</section>
+
+<iframe name="ikag_sink" style="display:none" title="form target"></iframe>
 
 <!-- FOOTER -->
 <footer>
@@ -429,6 +496,32 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
   }, { threshold: 0.1 });
   document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+
+  (function () {
+    var form  = document.getElementById("referral-form");
+    var panel = document.getElementById("referral-thanks");
+    var out   = document.getElementById("thanks-client-name");
+    var WUFOO = "https://preferredfundinggroup.wufoo.com/forms/m11357i31o9c893/";
+    if (!form) return;
+    function validate() {
+      var ok = true;
+      Array.prototype.forEach.call(form.querySelectorAll(".field"), function (w) { w.classList.remove("has-error"); });
+      Array.prototype.forEach.call(form.querySelectorAll("[data-required]"), function (el) {
+        var v = (el.value || "").trim();
+        var bad = !v;
+        if (!bad && el.type === "email") bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+        if (bad) { el.closest(".field").classList.add("has-error"); ok = false; }
+      });
+      return ok;
+    }
+    form.addEventListener("submit", function (ev) {
+      if (!validate()) { ev.preventDefault(); return; }
+      window.open(WUFOO, "_blank", "noopener");
+      out.textContent = (form.elements["clientName"].value || "").trim() || "your client";
+      form.style.display = "none";
+      panel.style.display = "block";
+    });
+  })();
 </script>
 </body>
 </html>

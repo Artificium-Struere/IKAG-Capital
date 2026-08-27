@@ -276,6 +276,27 @@
     .process-step:last-child { border-bottom: none; }
     .verticals-header { flex-direction: column; }
   }
+
+  /* mobile menu */
+  .nav-toggle { display: none; background: none; border: 0; padding: 10px 0; cursor: pointer; color: rgba(255,255,255,0.75); }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: currentColor; border-radius: 2px; }
+  .nav-toggle span + span { margin-top: 5px; }
+  .nav-toggle:hover { color: var(--gold-bright); }
+  @media (max-width: 900px) {
+    .nav-toggle { display: block; }
+    .nav-links {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: rgba(26,8,60,0.98); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(139,92,246,0.2);
+      padding: 6px 5% 18px; max-height: calc(100vh - 70px); overflow-y: auto;
+    }
+    #main-nav.mobile-open .nav-links { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: 14px 2px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .nav-links li:last-child a { border-bottom: none; }
+    .nav-cta { display: block; text-align: center; margin-top: 14px; padding: 13px 18px !important; font-size: 12px !important; border-radius: 2px; }
+  }
 </style>
 <link rel="icon" type="image/png" href="favicon.png" />
 <link rel="shortcut icon" href="favicon.ico" />
@@ -302,8 +323,10 @@
     <li><a href="industries.html">Industries</a></li>
     <li><a href="about.html" style="color: var(--gold-bright);">Team</a></li>
     <li><a href="events.html">Events</a></li>
+    <li><a href="apply.html">Apply</a></li>
     <li><a href="contact.html" class="nav-cta">Contact</a></li>
   </ul>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-controls="nav-links" onclick="toggleNav()"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- PAGE HERO -->
@@ -389,6 +412,7 @@
       <a href="industries.html">Industries</a>
       <a href="about.html">Our Team</a>
       <a href="events.html">Events</a>
+      <a href="apply.html">Apply</a>
       <a href="contact.html">Contact</a>
     </div>
   </div>

@@ -276,6 +276,32 @@
     .process-step:last-child { border-bottom: none; }
     .verticals-header { flex-direction: column; }
   }
+
+  /* inline form validation */
+  .field-error { display: none; font-size: 11px; font-weight: 500; color: #B4402F; margin-top: 6px; letter-spacing: 0.02em; }
+  .field.has-error .field-error { display: block; }
+  .field.has-error input, .field.has-error select, .field.has-error textarea { border-color: #B4402F; }
+
+  /* mobile menu */
+  .nav-toggle { display: none; background: none; border: 0; padding: 10px 0; cursor: pointer; color: rgba(255,255,255,0.75); }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: currentColor; border-radius: 2px; }
+  .nav-toggle span + span { margin-top: 5px; }
+  .nav-toggle:hover { color: var(--gold-bright); }
+  @media (max-width: 900px) {
+    .nav-toggle { display: block; }
+    .nav-links {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: rgba(26,8,60,0.98); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(139,92,246,0.2);
+      padding: 6px 5% 18px; max-height: calc(100vh - 70px); overflow-y: auto;
+    }
+    #main-nav.mobile-open .nav-links { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: 14px 2px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .nav-links li:last-child a { border-bottom: none; }
+    .nav-cta { display: block; text-align: center; margin-top: 14px; padding: 13px 18px !important; font-size: 12px !important; border-radius: 2px; }
+  }
 </style>
 <link rel="icon" type="image/png" href="favicon.png" />
 <link rel="shortcut icon" href="favicon.ico" />
@@ -302,8 +328,10 @@
     <li><a href="industries.html">Industries</a></li>
     <li><a href="about.html">Team</a></li>
     <li><a href="events.html">Events</a></li>
+    <li><a href="apply.html">Apply</a></li>
     <li><a href="contact.html" class="nav-cta" style="background: var(--gold-bright) !important;">Contact</a></li>
   </ul>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-controls="nav-links" onclick="toggleNav()"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- PAGE HERO -->
@@ -336,6 +364,110 @@
   </div>
 </section>
 
+
+<!-- DEAL SUBMISSION -->
+<section id="deal-submission" style="background: var(--bg-card); border-top: 1px solid var(--border);">
+  <div class="section-label">Submit a Deal</div>
+  <h2>Submit a Deal</h2>
+  <p class="form-left-text" style="max-width: 700px; margin-top: 16px;">Ready to discuss financing for a specific project? Complete the form below and a member of our team will reach out within 24 hours.</p>
+
+  <div class="form-grid">
+    <div>
+      <div class="form-left-headline">What Happens After You Submit</div>
+      <ul class="form-perks">
+        <li><span><strong style="color: var(--text-primary); font-weight: 600;">Response within 24 business hours</strong> to confirm receipt and next steps</span></li>
+        <li><span><strong style="color: var(--text-primary); font-weight: 600;">Confidential review</strong> by our underwriting and capital advisory team</span></li>
+        <li><span><strong style="color: var(--text-primary); font-weight: 600;">No obligation.</strong> We provide honest feedback and a path forward</span></li>
+        <li><span><strong style="color: var(--text-primary); font-weight: 600;">Complete deal packages move faster.</strong> Proformas, rent rolls, and sponsor bios help</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <form id="deal-form" action="https://script.google.com/a/macros/ikag.capital/s/AKfycbzNkVhPSq2V26l_3PBVcEpU5GJ7Rg8I5W8b0XubkBFDekZYBQ-Z3YjLE1sau0T0S8W6Sg/exec" method="POST" target="ikag_sink" novalidate>
+        <input type="hidden" name="formType" value="deal-submission" />
+        <div class="field">
+          <label for="d-name">Name</label>
+          <input type="text" id="d-name" name="name" data-required />
+          <span class="field-error">Please enter your name.</span>
+        </div>
+        <div class="field">
+          <label for="d-email">Email</label>
+          <input type="email" id="d-email" name="email" data-required />
+          <span class="field-error">Please enter a valid email address.</span>
+        </div>
+        <div class="field">
+          <label for="d-phone">Phone</label>
+          <input type="tel" id="d-phone" name="phone" />
+        </div>
+        <div class="field">
+          <label for="d-company">Company / Sponsorship Entity</label>
+          <input type="text" id="d-company" name="company" data-required />
+          <span class="field-error">Please enter your company or sponsorship entity.</span>
+        </div>
+        <div class="field field-full">
+          <label for="d-ikagRep">IKAG Representative</label>
+          <input type="text" id="d-ikagRep" name="ikagRep" />
+          <span style="display: block; font-size: 11px; font-weight: 300; color: var(--text-light); margin-top: 6px; line-height: 1.6;">If an IKAG representative referred you, enter their name.</span>
+        </div>
+        <div class="field">
+          <label for="d-assetType">Asset Type</label>
+          <select id="d-assetType" name="assetType" data-required>
+            <option value="">Select one</option>
+            <option value="Multifamily">Multifamily</option>
+            <option value="Mixed-Use">Mixed-Use</option>
+            <option value="Condo/Townhome">Condo/Townhome</option>
+            <option value="SFR/Build-for-Rent">SFR/Build-for-Rent</option>
+            <option value="Retail">Retail</option>
+            <option value="Hospitality">Hospitality</option>
+            <option value="Industrial">Industrial</option>
+            <option value="Office">Office</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="field-error">Please select an asset type.</span>
+        </div>
+        <div class="field">
+          <label for="d-location">Location (City, State)</label>
+          <input type="text" id="d-location" name="location" placeholder="e.g. Austin, TX" data-required />
+          <span class="field-error">Please enter a location.</span>
+        </div>
+        <div class="field">
+          <label for="d-capitalType">Capital Type Needed</label>
+          <select id="d-capitalType" name="capitalType" data-required>
+            <option value="">Select one</option>
+            <option value="Senior Debt">Senior Debt</option>
+            <option value="Construction Loan">Construction Loan</option>
+            <option value="Bridge Loan">Bridge Loan</option>
+            <option value="Preferred Equity">Preferred Equity</option>
+            <option value="Mezzanine Debt">Mezzanine Debt</option>
+            <option value="JV Equity">JV Equity</option>
+            <option value="Multiple / Full Stack">Multiple / Full Stack</option>
+          </select>
+          <span class="field-error">Please select a capital type.</span>
+        </div>
+        <div class="field">
+          <label for="d-capitalAmount">Approximate Capital Amount</label>
+          <input type="text" id="d-capitalAmount" name="capitalAmount" placeholder="e.g. $5M - $8M" data-required />
+          <span class="field-error">Please enter an approximate amount.</span>
+        </div>
+        <div class="field field-full">
+          <label for="d-summary">Short Deal Summary</label>
+          <textarea id="d-summary" name="summary" placeholder="Briefly describe your project, capital needs, sponsor experience, and timeline." data-required></textarea>
+          <span class="field-error">Please add a short deal summary.</span>
+        </div>
+        <button type="submit" class="btn-submit">Submit Deal for Review</button>
+        <p class="form-disclaimer">Please do not submit Social Security numbers, dates of birth, bank account numbers, or card information.</p>
+      </form>
+
+      <div id="deal-thanks" class="form-success">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px;">Thank you.</div>
+        <p style="font-size: 14px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Your deal has been submitted. A member of our team will reach out within 24 business hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<iframe name="ikag_sink" style="display:none" title="form target"></iframe>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
@@ -350,6 +482,7 @@
       <a href="industries.html">Industries</a>
       <a href="about.html">Our Team</a>
       <a href="events.html">Events</a>
+      <a href="apply.html">Apply</a>
       <a href="contact.html">Contact</a>
     </div>
   </div>
@@ -369,6 +502,28 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
   }, { threshold: 0.1 });
   document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+
+  (function () {
+    var form  = document.getElementById("deal-form");
+    var panel = document.getElementById("deal-thanks");
+    if (!form) return;
+    function validate() {
+      var ok = true;
+      Array.prototype.forEach.call(form.querySelectorAll(".field"), function (w) { w.classList.remove("has-error"); });
+      Array.prototype.forEach.call(form.querySelectorAll("[data-required]"), function (el) {
+        var v = (el.value || "").trim();
+        var bad = !v;
+        if (!bad && el.type === "email") bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+        if (bad) { el.closest(".field").classList.add("has-error"); ok = false; }
+      });
+      return ok;
+    }
+    form.addEventListener("submit", function (ev) {
+      if (!validate()) { ev.preventDefault(); return; }
+      form.style.display = "none";
+      panel.style.display = "block";
+    });
+  })();
 </script>
 </body>
 </html>
