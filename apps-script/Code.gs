@@ -56,7 +56,7 @@ function setup() {
   Logger.log('Email quota left: ' + MailApp.getRemainingDailyQuota());
   Logger.log('Photo folder:     ' + folder_(PHOTO_ROOT).getUrl());
 
-  MailApp.sendEmail({
+  notify_({
     to: NOTIFY_EMAIL,
     subject: 'IKAG setup test',
     body: 'Tabs and the listing photo folder are ready.\n'
@@ -177,7 +177,7 @@ function handleListing_(p) {
     p.description || '', ids.join(',')
   ]);
 
-  MailApp.sendEmail({
+  notify_({
     to: NOTIFY_EMAIL,
     replyTo: p.email || NOTIFY_EMAIL,
     subject: 'New property listing ' + id + ': ' + (p.city || '') + ', ' + (p.state || ''),
@@ -252,7 +252,7 @@ function handleInquiry_(p) {
     p.phone || '', p.entity || '', p.trackRecord || '', where
   ]);
 
-  MailApp.sendEmail({
+  notify_({
     to: NOTIFY_EMAIL,
     replyTo: p.email || NOTIFY_EMAIL,
     subject: 'Listing inquiry on ' + (p.listingId || 'a listing') + ' from ' + (p.fullName || 'someone'),
@@ -301,7 +301,7 @@ function handleUnsecured_(p) {
     'Submitted by: '         + (p.repName || '') + ' (' + (p.repEmail || '') + ')\n' +
     'Notes: '                + (p.notes || 'none') + '\n';
 
-  MailApp.sendEmail({
+  notify_({
     to: NOTIFY_EMAIL,
     replyTo: p.repEmail || NOTIFY_EMAIL,
     subject: 'New client from ' + (p.repName || 'a rep') + ': ' + (p.clientName || 'unnamed'),
@@ -309,7 +309,7 @@ function handleUnsecured_(p) {
   });
 
   if (p.repEmail) {
-    MailApp.sendEmail({
+    notify_({
       to: p.repEmail,
       subject: 'Received: ' + (p.clientName || 'your client') + ' is in',
       body: (p.repName ? p.repName + ',\n\n' : '') +
@@ -324,7 +324,7 @@ function handleDeal_(p) {
   logRow_(TAB_DEALS, [new Date(), p.name, p.email, p.phone, p.company, p.ikagRep,
                       p.assetType, p.location, p.capitalType, p.capitalAmount, p.summary]);
 
-  MailApp.sendEmail({
+  notify_({
     to: NOTIFY_EMAIL,
     replyTo: p.email || NOTIFY_EMAIL,
     subject: 'New deal: ' + (p.company || p.name || 'unnamed') + ' / ' + (p.capitalType || ''),
@@ -343,6 +343,25 @@ function handleDeal_(p) {
 }
 
 /* ----------------------------------------------------------------- helpers */
+
+/**
+ * Sends a notification. Prefers GmailApp because MailApp mail from
+ * contact@ikag.capital to itself lands in Spam, while GmailApp lands in the
+ * Inbox. Falls back to MailApp if GmailApp throws. Takes the same object
+ * shape MailApp.sendEmail does: {to, subject, body, replyTo?, htmlBody?, name?}.
+ */
+function notify_(msg) {
+  var opts = {};
+  if (msg.replyTo)  opts.replyTo  = msg.replyTo;
+  if (msg.htmlBody) opts.htmlBody = msg.htmlBody;
+  if (msg.name)     opts.name     = msg.name;
+  try {
+    GmailApp.sendEmail(msg.to, msg.subject, msg.body || '', opts);
+  } catch (err) {
+    logError_(err, { notify: 'GmailApp failed, using MailApp', to: msg.to, subject: msg.subject });
+    MailApp.sendEmail(msg);
+  }
+}
 
 function params_(e) {
   if (e && e.postData && e.postData.contents) {
