@@ -58,21 +58,6 @@
   .disc-bar a { color: rgba(255,255,255,0.42); text-decoration: underline; }
   .disc-bar-close { cursor: pointer; margin-left: 12px; font-size: 12px; vertical-align: middle; }
 
-  /* INTRO: the brand film opens the site, with a button straight through to
-     the home page. Desktop only, where phones never fetch the file at all,
-     and never for anyone who has asked for reduced motion. It is hidden by
-     default so that without JavaScript the site is simply the site. */
-  .intro { position: fixed; inset: 0; z-index: 9999;
-           display: flex; flex-direction: column; align-items: center; justify-content: center;
-           gap: 28px; padding: 32px;
-           background: linear-gradient(150deg, var(--purple-deep) 0%, #0D0A20 55%, #12111A 100%); }
-  .intro[hidden] { display: none; }
-  .intro video { display: block; height: min(68vh, 700px); width: auto; max-width: 92vw;
-                 border-radius: 3px; background: #0D0A20;
-                 border: 1px solid rgba(139,92,246,0.28);
-                 box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
-  .intro-enter { border: 0; cursor: pointer; font-family: "Inter", sans-serif; }
-
   /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
@@ -377,12 +362,6 @@
 <link rel="apple-touch-icon" href="favicon.png" />
 </head>
 <body>
-<div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="IKAG Capital intro" hidden>
-  <video id="intro-video" data-src="ikag-hero.mp4" poster="ikag-hero-poster.jpg"
-         muted playsinline preload="none" aria-label="IKAG Capital brand film"></video>
-  <button type="button" class="btn-primary intro-enter" id="intro-enter">Enter Site</button>
-</div>
-
 
 <!-- DISCLAIMER BAR -->
 <div class="disc-bar" id="disc-bar">
@@ -533,42 +512,6 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
   }, { threshold: 0.1 });
   document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
-
-  // The brand film opens the site once per visit. The source is only attached
-  // when it is actually going to play, so a phone never downloads it.
-  (function () {
-    const intro = document.getElementById("intro");
-    const video = document.getElementById("intro-video");
-    const enter = document.getElementById("intro-enter");
-    if (!intro || !video || !enter) return;
-
-    const mq = window.matchMedia;
-    const wideEnough = mq && mq("(min-width: 1024px)").matches;
-    const reduced = mq && mq("(prefers-reduced-motion: reduce)").matches;
-    let seen = false;
-    try { seen = sessionStorage.getItem("ikagIntroSeen") === "1"; } catch (e) {}
-    if (!wideEnough || reduced || seen) return;
-
-    function close() {
-      intro.hidden = true;
-      document.documentElement.style.overflow = "";
-      video.pause();
-      document.removeEventListener("keydown", onKey);
-    }
-    function onKey(e) { if (e.key === "Escape") close(); }
-
-    try { sessionStorage.setItem("ikagIntroSeen", "1"); } catch (e) {}
-    video.src = video.getAttribute("data-src");
-    intro.hidden = false;
-    document.documentElement.style.overflow = "hidden";
-    document.addEventListener("keydown", onKey);
-    enter.addEventListener("click", close);
-    video.addEventListener("ended", close);
-    // if playback will not start, do not strand anyone on a still frame
-    const started = video.play();
-    if (started && started.catch) started.catch(close);
-    enter.focus();
-  })();
 </script>
 </body>
 </html>
