@@ -68,7 +68,14 @@
     backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(139,92,246,0.2);
   }
-  .nav-logo img { height: 66px; width: auto; display: block; mix-blend-mode: screen; }
+  /* home button: the logo sits inside a house-shaped plate, since it is the
+     link back to the home page. The plate is drawn here rather than coming
+     from the artwork, and the image is clipped with it so the square backing
+     baked into the logo file cannot show past the roof line. */
+  .nav-logo { display: flex; align-items: flex-end; justify-content: center;
+              width: 78px; height: 66px; background: #150733;
+              clip-path: polygon(50% 0%, 100% 34%, 100% 100%, 0% 100%, 0% 34%); }
+  .nav-logo img { height: 42px; width: auto; display: block; margin-bottom: 6px; mix-blend-mode: screen; }
   .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
   .nav-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--gold-bright); }
