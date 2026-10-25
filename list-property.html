@@ -366,6 +366,16 @@
     .photo-list { grid-template-columns: repeat(3, 1fr); }
     .modal { padding: 28px 20px 24px; }
   }
+
+  /* buyer book band */
+  .buyer-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: start; }
+  .buyer-aside { display: grid; gap: 1px; background: rgba(139,92,246,0.18); }
+  .buyer-point { background: rgba(26,8,60,0.55); padding: 20px 22px; }
+  .buyer-point-title { display: block; font-family: "Plus Jakarta Sans", sans-serif; font-size: 15px; font-weight: 700; color: #F7F4EE; margin-bottom: 5px; }
+  .buyer-point-body { display: block; font-size: 13px; font-weight: 300; color: rgba(247,244,238,0.55); line-height: 1.65; }
+  @media (max-width: 900px) {
+    .buyer-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
 </style>
 
 <link rel="icon" type="image/png" href="favicon.png" />
@@ -408,6 +418,35 @@
     <div style="display: inline-flex; align-items: center; gap: 10px; padding: 7px 16px; border: 1px solid rgba(196,151,42,0.35); border-radius: 99px; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; background: rgba(196,151,42,0.07);">Free Listing</div>
     <h1 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(32px, 4.5vw, 56px); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; color: #F7F4EE; margin-bottom: 20px;">List a Property</h1>
     <p style="font-size: 16px; font-weight: 300; color: rgba(247,244,238,0.65); max-width: 640px; line-height: 1.75;">Wholesalers, sellers, and agents can list a property here at no cost. We review every submission before it goes live.</p>
+  </div>
+</section>
+
+<!-- BUYER BOOK -->
+<section id="buyer-book" style="background: linear-gradient(160deg, var(--purple-deep) 0%, #0D0A20 100%); position: relative;">
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(107,56,204,0.18) 0%, transparent 60%); pointer-events: none;"></div>
+  <div style="position: relative; z-index: 1; max-width: 1400px; margin: 0 auto;">
+    <div class="buyer-grid">
+      <div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px;">Why List With Us</div>
+        <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: #F7F4EE; line-height: 1.2; margin-bottom: 20px;">Hundreds of investors are already looking.</h2>
+        <p style="font-size: 15px; font-weight: 300; color: rgba(247,244,238,0.6); line-height: 1.8; margin-bottom: 16px;">We keep a book of hundreds of investors who are actively searching for their next acquisition. When a listing is approved, it goes in front of that book rather than sitting on a public board waiting to be found.</p>
+        <p style="font-size: 15px; font-weight: 300; color: rgba(247,244,238,0.6); line-height: 1.8; margin-bottom: 16px;">Inquiries come back through us, not straight to your phone. Every buyer who asks about a property tells us who they are, what they have closed, and how they intend to fund it, so you hear from the ones worth your time.</p>
+      </div>
+      <div class="buyer-aside">
+        <div class="buyer-point">
+          <span class="buyer-point-title">A live buyer list</span>
+          <span class="buyer-point-body">Hundreds of investors searching now, not a mailing list.</span>
+        </div>
+        <div class="buyer-point">
+          <span class="buyer-point-title">Qualified inquiries</span>
+          <span class="buyer-point-body">Track record and entity collected before anyone reaches you.</span>
+        </div>
+        <div class="buyer-point">
+          <span class="buyer-point-title">Financing behind the deal</span>
+          <span class="buyer-point-body">Buyers can be funded through us, so deals close.</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
