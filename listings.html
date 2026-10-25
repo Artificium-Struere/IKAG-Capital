@@ -601,7 +601,7 @@
     // The backend is not connected yet, so an unreachable feed shows the empty
     // state rather than an error. Set this to false once the endpoint is live,
     // otherwise a genuine outage will look like an empty catalogue.
-    var PRELAUNCH = true;
+    var PRELAUNCH = false;
     var SOURCE   = USE_MOCK ? "listings.mock.json" : ENDPOINT;
 
     var grid    = document.getElementById("listing-grid");
