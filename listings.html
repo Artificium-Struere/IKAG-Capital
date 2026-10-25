@@ -842,8 +842,15 @@
 
       // text/plain keeps this a simple request, so the browser sends no
       // preflight. Apps Script reads it from e.postData.contents.
-      fetch(ENDPOINT, { method: "POST", body: JSON.stringify(body) })
-        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+      // mode:no-cors avoids hanging on Apps Script's 302→googleusercontent redirect
+      // (CORS POST follow can leave the button on "Sending." for a long time).
+      // Opaque responses cannot be read, so treat settle as success; the Sheet
+      // and email are the source of truth.
+      fetch(ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify(body)
+      })
         .then(function () {
           form.style.display = "none";
           thanks.textContent = "Thanks, " + name + ". We've received your request on " +
