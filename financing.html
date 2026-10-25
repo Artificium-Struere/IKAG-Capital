@@ -72,12 +72,19 @@
      link back to the home page. The plate is drawn here rather than coming
      from the artwork, and the image is clipped with it so the square backing
      baked into the logo file cannot show past the roof line. */
-  .nav-logo { display: flex; align-items: flex-end; justify-content: center;
-              width: 78px; height: 66px; background: #150733;
-              clip-path: polygon(50% 0%, 100% 34%, 100% 100%, 0% 100%, 0% 34%); }
-  .nav-logo img { height: 42px; width: auto; display: block; margin-bottom: 6px; mix-blend-mode: screen; }
+  .nav-logo { position: relative; display: block; flex-shrink: 0;
+              width: 92px; height: 66px; background: #150733;
+              clip-path: polygon(50% 0%, 100% 30%, 100% 100%, 0% 100%, 0% 30%); }
+  /* The logo file is a square with the wordmark filling only the middle third,
+     so the image is sized well past the plate and positioned by its artwork
+     rather than its edges. The surrounding black is clipped away above and
+     below, and the horizontal nudge offsets the wordmark's own off-centre
+     position inside the square. */
+  .nav-logo img { position: absolute; left: 50%; bottom: -16px;
+                  height: 76px; width: auto;
+                  transform: translateX(calc(-50% - 3px)); mix-blend-mode: screen; }
   .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
-  .nav-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a { color: rgba(255,255,255,0.5); text-decoration: none; white-space: nowrap; font-size: 13px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--gold-bright); }
   .nav-cta { padding: 10px 24px; background: var(--gold) !important; color: var(--navy) !important; border-radius: 2px; font-weight: 700 !important; transition: background 0.2s !important; }
   .nav-cta:hover { background: var(--gold-bright) !important; }
@@ -291,7 +298,10 @@
   .nav-toggle span { display: block; width: 24px; height: 2px; background: currentColor; border-radius: 2px; }
   .nav-toggle span + span { margin-top: 5px; }
   .nav-toggle:hover { color: var(--gold-bright); }
-  @media (max-width: 900px) {
+  /* The hamburger takes over at 1180px rather than 900px: below that the nine
+     links and the logo plate no longer fit the bar together, and the row used
+     to win by squashing the plate. */
+  @media (max-width: 1180px) {
     .nav-toggle { display: block; }
     .nav-links {
       display: none; position: absolute; top: 100%; left: 0; right: 0;
