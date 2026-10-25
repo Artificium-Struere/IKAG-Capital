@@ -56,7 +56,7 @@ function setup() {
 
 var LISTING_HEADERS_ = [
   'Listing ID', 'Timestamp', 'Status', 'Lister Name', 'Lister Email', 'Lister Phone',
-  'Company / Entity', 'Role', 'Property Type', 'Full Address', 'City', 'State',
+  'Company / Entity', 'Role', 'Category', 'Property Type', 'Full Address', 'City', 'State',
   'Asking Price', 'Units', 'Sq Ft', 'ARV', 'Rent', 'Description', 'Photo File IDs'
 ];
 
@@ -103,6 +103,7 @@ function publicListings_() {
     out.push({
       id:           String(r[col['Listing ID']] || ''),
       status:       status,
+      category:     String(r[col['Category']] || ''),
       propertyType: String(r[col['Property Type']] || ''),
       city:         String(r[col['City']] || ''),
       state:        String(r[col['State']] || ''),
@@ -162,7 +163,7 @@ function handleListing_(p) {
   logRow_(TAB_LISTINGS, [
     id, stamp, 'Pending',
     p.name || '', p.email || '', p.phone || '', p.company || '', p.role || '',
-    p.propertyType || '', p.address || '', p.city || '', p.state || '',
+    p.category || '', p.propertyType || '', p.address || '', p.city || '', p.state || '',
     p.askingPrice || '', p.units || '', p.sqft || '', p.arv || '', p.rent || '',
     p.description || '', ids.join(',')
   ]);
@@ -178,6 +179,7 @@ function handleListing_(p) {
       'Email: '        + (p.email || '') + '\n' +
       'Phone: '        + (p.phone || '') + '\n' +
       'Company: '      + (p.company || '') + '\n\n' +
+      'Category: '     + (p.category || '') + '\n' +
       'Property type: '+ (p.propertyType || '') + '\n' +
       'Address: '      + (p.address || '') + '\n' +
       'City / State: ' + (p.city || '') + ', ' + (p.state || '') + '\n' +

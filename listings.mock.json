@@ -1,41 +1,113 @@
 {
   "ok": true,
   "listings": [
-    { "id": "IKAG-0001", "status": "New", "propertyType": "Multifamily",
-      "city": "Pittsburgh", "state": "PA", "askingPrice": 1850000,
-      "units": "24", "sqft": "21,400", "arv": "2,400,000", "rent": "18,900/mo",
+    {
+      "id": "IKAG-0001",
+      "status": "New",
+      "propertyType": "Multifamily",
+      "city": "Pittsburgh",
+      "state": "PA",
+      "askingPrice": 1850000,
+      "units": "24",
+      "sqft": "21,400",
+      "arv": "2,400,000",
+      "rent": "18,900/mo",
       "description": "Brick walk-up near the university corridor. Twelve units renovated, twelve original. Seller financing considered.",
       "listedOn": "2026-10-18T14:02:00.000Z",
-      "photos": ["https://placehold.co/1600x1067/1A0A3C/F7F4EE?text=Pittsburgh+PA"] },
-    { "id": "IKAG-0002", "status": "Under Contract", "propertyType": "Retail",
-      "city": "Columbus", "state": "OH", "askingPrice": 940000,
-      "units": "6", "sqft": "11,800", "arv": null, "rent": "7,200/mo",
+      "photos": [
+        "https://placehold.co/1600x1067/1A0A3C/F7F4EE?text=Pittsburgh+PA"
+      ],
+      "category": "Residential"
+    },
+    {
+      "id": "IKAG-0002",
+      "status": "Under Contract",
+      "propertyType": "Retail",
+      "city": "Columbus",
+      "state": "OH",
+      "askingPrice": 940000,
+      "units": "6",
+      "sqft": "11,800",
+      "arv": null,
+      "rent": "7,200/mo",
       "description": "Strip center on a signalized corner. Anchor has four years remaining.",
       "listedOn": "2026-10-11T09:30:00.000Z",
-      "photos": ["https://placehold.co/1600x1067/3D1F8C/F7F4EE?text=Columbus+OH"] },
-    { "id": "IKAG-0003", "status": "New", "propertyType": "Single Family",
-      "city": "Mesa", "state": "AZ", "askingPrice": 410000,
-      "units": "1", "sqft": "2,180", "arv": "565,000", "rent": null,
+      "photos": [
+        "https://placehold.co/1600x1067/3D1F8C/F7F4EE?text=Columbus+OH"
+      ],
+      "category": "Commercial"
+    },
+    {
+      "id": "IKAG-0003",
+      "status": "New",
+      "propertyType": "Single Family",
+      "city": "Mesa",
+      "state": "AZ",
+      "askingPrice": 410000,
+      "units": "1",
+      "sqft": "2,180",
+      "arv": "565,000",
+      "rent": null,
       "description": "Cosmetic rehab in an established neighbourhood. Roof and HVAC replaced in 2024.",
       "listedOn": "2026-10-21T17:45:00.000Z",
-      "photos": ["https://placehold.co/1600x1067/6B38CC/F7F4EE?text=Mesa+AZ"] },
-    { "id": "IKAG-0004", "status": "New", "propertyType": "Industrial",
-      "city": "Greenville", "state": "SC", "askingPrice": 3250000,
-      "units": null, "sqft": "48,000", "arv": null, "rent": "22,400/mo",
+      "photos": [
+        "https://placehold.co/1600x1067/6B38CC/F7F4EE?text=Mesa+AZ"
+      ],
+      "category": "Residential"
+    },
+    {
+      "id": "IKAG-0004",
+      "status": "New",
+      "propertyType": "Industrial",
+      "city": "Greenville",
+      "state": "SC",
+      "askingPrice": 3250000,
+      "units": null,
+      "sqft": "48,000",
+      "arv": null,
+      "rent": "22,400/mo",
       "description": "Flex warehouse with 24 foot clear height and eight dock doors. Two tenants in place.",
       "listedOn": "2026-10-05T12:00:00.000Z",
-      "photos": ["https://placehold.co/1600x1067/C4972A/12111A?text=Greenville+SC"] },
-    { "id": "IKAG-0005", "status": "New", "propertyType": "Mixed-Use",
-      "city": "Louisville", "state": "KY", "askingPrice": 1250000,
-      "units": "9", "sqft": "14,600", "arv": "1,700,000", "rent": "11,100/mo",
+      "photos": [
+        "https://placehold.co/1600x1067/C4972A/12111A?text=Greenville+SC"
+      ],
+      "category": "Commercial"
+    },
+    {
+      "id": "IKAG-0005",
+      "status": "New",
+      "propertyType": "Mixed-Use",
+      "city": "Louisville",
+      "state": "KY",
+      "askingPrice": 1250000,
+      "units": "9",
+      "sqft": "14,600",
+      "arv": "1,700,000",
+      "rent": "11,100/mo",
       "description": "Ground floor retail with eight apartments above. Full occupancy, below market rents.",
       "listedOn": "2026-10-14T08:15:00.000Z",
-      "photos": ["https://placehold.co/1600x1067/8B5CF6/12111A?text=Louisville+KY"] },
-    { "id": "IKAG-0006", "status": "Under Contract", "propertyType": "Land",
-      "city": "Bryan", "state": "TX", "askingPrice": 680000,
-      "units": null, "sqft": null, "arv": null, "rent": null,
+      "photos": [
+        "https://placehold.co/1600x1067/8B5CF6/12111A?text=Louisville+KY"
+      ],
+      "category": "Commercial"
+    },
+    {
+      "id": "IKAG-0006",
+      "status": "Under Contract",
+      "propertyType": "Land",
+      "city": "Bryan",
+      "state": "TX",
+      "askingPrice": 680000,
+      "units": null,
+      "sqft": null,
+      "arv": null,
+      "rent": null,
       "description": "Eleven acres, entitled for residential. Utilities at the lot line.",
       "listedOn": "2026-09-29T15:20:00.000Z",
-      "photos": ["https://placehold.co/1600x1067/1A0A3C/D9AB38?text=Bryan+TX"] }
+      "photos": [
+        "https://placehold.co/1600x1067/1A0A3C/D9AB38?text=Bryan+TX"
+      ],
+      "category": "Commercial"
+    }
   ]
 }
