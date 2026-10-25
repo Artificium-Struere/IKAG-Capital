@@ -10,6 +10,15 @@
  * See DEPLOY.md in this folder.
  */
 
+/* Who gets the alert on every submission. Comma separated, no spaces.
+ *
+ * Add a second address that is NOT contact@ikag.capital. This script runs as
+ * contact@ikag.capital, and Gmail can file a message you send to yourself with
+ * your Sent mail instead of putting it in your inbox. A second address removes
+ * all doubt, because it is never both sender and recipient.
+ *
+ *   var NOTIFY_EMAIL = 'contact@ikag.capital,you@gmail.com';
+ */
 var NOTIFY_EMAIL  = 'contact@ikag.capital';
 var IKAG_PHONE    = '(866) 778-1354';
 var PHOTO_ROOT    = 'IKAG Listing Photos';
