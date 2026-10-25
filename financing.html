@@ -318,6 +318,21 @@
     .card-grid { grid-template-columns: 1fr; max-width: none; }
     .card-grid > *, .card-grid > *:last-child:nth-child(odd) { grid-column: 1; }
   }
+
+  /* feature grid: centred, icon led, hairline dividers, no panels */
+  .card-grid > * { padding: 0 26px; text-align: center; }
+  .card-grid > *:not(:nth-child(3n+1)) { border-left: 1px solid var(--border); }
+  .feature-icon { display: block; width: 44px; height: 44px; margin: 0 auto 20px; color: var(--purple-accent); }
+  .feature-icon path, .feature-icon circle { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .feature-title { font-family: "Inter", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-muted); line-height: 1.6; margin-bottom: 16px; }
+  .feature-body { font-size: 14px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; }
+  @media (max-width: 1200px) {
+    .card-grid > *:not(:nth-child(3n+1)) { border-left: 0; }
+    .card-grid > *:not(:nth-child(2n+1)) { border-left: 1px solid var(--border); }
+  }
+  @media (max-width: 900px) {
+    .card-grid > *, .card-grid > *:not(:nth-child(2n+1)) { border-left: 0; padding: 0; }
+  }
 </style>
 <link rel="icon" type="image/png" href="favicon.png" />
 <link rel="shortcut icon" href="favicon.ico" />
@@ -365,44 +380,52 @@
   
   <div class="card-grid">
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--purple-accent);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Bridge Loans</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Short-term financing for value-add acquisitions, repositioning, and lease-up scenarios. Acquisition and light renovation capital, stabilization financing, non-recourse and recourse options with 12 to 36 month terms.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M3 31h42"/><path d="M11 31V15m26 16V15"/><path d="M11 17c7 10 19 10 26 0"/><path d="M18 31v-7m12 7v-7"/><path d="M3 38h42"/></svg>
+      <div class="feature-title">Bridge Loans</div>
+      <p class="feature-body">Short-term financing for value-add acquisitions, repositioning, and lease-up scenarios. Acquisition and light renovation capital, stabilization financing, non-recourse and recourse options with 12 to 36 month terms.</p>
     </div>
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--gold);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Construction Loans</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Ground-up multifamily, mixed-use, condo, townhome, and commercial development financing. Vertical construction with phased funding, interest reserves, and sponsor-friendly structures with leverage up to 85% of cost basis.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M13 42V7h24"/><path d="M13 7 37 7"/><path d="M30 7v9"/><path d="M26 16h8v7h-8z"/><path d="M6 42h16"/><path d="M13 13l9 0"/></svg>
+      <div class="feature-title">Construction Loans</div>
+      <p class="feature-body">Ground-up multifamily, mixed-use, condo, townhome, and commercial development financing. Vertical construction with phased funding, interest reserves, and sponsor-friendly structures with leverage up to 85% of cost basis.</p>
     </div>
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--purple-accent);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">DSCR Investor Loans</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Rental portfolio financing based on property cash flow, not personal income. No tax returns or W-2s required. Long-term fixed rates for SFR, duplex, triplex, and quads from $100K to $3M+ per property.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M7 22 24 9l17 13"/><path d="M12 22v18h24V22"/><path d="M18 34v-4m6 4v-8m6 8v-11"/></svg>
+      <div class="feature-title">DSCR Investor Loans</div>
+      <p class="feature-body">Rental portfolio financing based on property cash flow, not personal income. No tax returns or W-2s required. Long-term fixed rates for SFR, duplex, triplex, and quads from $100K to $3M+ per property.</p>
     </div>
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--gold);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">CMBS Loans</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Non-recourse, long-term fixed-rate financing for stabilized income-producing commercial properties. Multifamily, retail, office, industrial, and hospitality. Fixed rates with 5, 7, and 10-year terms typically $2M to $50M+.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M14 42V7h20v35"/><path d="M8 42h32"/><path d="M19 14h3m4 0h3m-10 7h3m4 0h3m-10 7h3m4 0h3"/><path d="M22 42v-7h4v7"/></svg>
+      <div class="feature-title">CMBS Loans</div>
+      <p class="feature-body">Non-recourse, long-term fixed-rate financing for stabilized income-producing commercial properties. Multifamily, retail, office, industrial, and hospitality. Fixed rates with 5, 7, and 10-year terms typically $2M to $50M+.</p>
     </div>
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--purple-accent);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Preferred Equity</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Gap capital solutions bridging senior debt and sponsor equity in complex capital stacks. Non-dilutive to common equity, flexible return structures for development and acquisition transactions.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M11 11h26v7H11z"/><path d="M11 21h26v7H11z"/><path d="M11 31h26v7H11z"/><path d="M24 11V7"/></svg>
+      <div class="feature-title">Preferred Equity</div>
+      <p class="feature-body">Gap capital solutions bridging senior debt and sponsor equity in complex capital stacks. Non-dilutive to common equity, flexible return structures for development and acquisition transactions.</p>
     </div>
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--gold);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">SBA 504 Loans</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Government-backed financing for owner-occupied commercial real estate with below-market fixed rates. Up to 90% LTV, 25-year fixed rates, low down payment requirements. Ideal for small business owners.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M5 19 24 8l19 11"/><path d="M5 19h38"/><path d="M11 19v17m8-17v17m10-17v17m8-17v17"/><path d="M3 41h42"/></svg>
+      <div class="feature-title">SBA 504 Loans</div>
+      <p class="feature-body">Government-backed financing for owner-occupied commercial real estate with below-market fixed rates. Up to 90% LTV, 25-year fixed rates, low down payment requirements. Ideal for small business owners.</p>
     </div>
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--gold);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Refinance &amp; Cash-Out</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Debt refinance and equity extraction to unlock value, extend terms, or reposition capital stacks. Cash-out refinance for acquisitions or distributions, rate-and-term refinance, equity recap with preferred or JV partners.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M39 24a15 15 0 1 1-4.4-10.6"/><path d="M39 7v8h-8"/><path d="M24 16v16"/><path d="M28 20h-6a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-6"/></svg>
+      <div class="feature-title">Refinance &amp; Cash-Out</div>
+      <p class="feature-body">Debt refinance and equity extraction to unlock value, extend terms, or reposition capital stacks. Cash-out refinance for acquisitions or distributions, rate-and-term refinance, equity recap with preferred or JV partners.</p>
     </div>
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--purple-accent);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Fix &amp; Flip Loans</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Fast, flexible capital for residential investors acquiring and renovating single-family, townhome, and small multifamily properties. Purchase plus renovation in one loan, up to 90% LTC, interest-only during hold.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M7 23 24 9l17 14"/><path d="M12 23v17h24V23"/><path d="M20 34l8-8"/><path d="M26 23l5 5"/></svg>
+      <div class="feature-title">Fix &amp; Flip Loans</div>
+      <p class="feature-body">Fast, flexible capital for residential investors acquiring and renovating single-family, townhome, and small multifamily properties. Purchase plus renovation in one loan, up to 90% LTC, interest-only during hold.</p>
     </div>
 
   </div>

@@ -316,6 +316,21 @@
     .card-grid { grid-template-columns: 1fr; max-width: none; }
     .card-grid > *, .card-grid > *:last-child:nth-child(odd) { grid-column: 1; }
   }
+
+  /* feature grid: centred, icon led, hairline dividers, no panels */
+  .card-grid > * { padding: 0 26px; text-align: center; }
+  .card-grid > *:not(:nth-child(3n+1)) { border-left: 1px solid var(--border); }
+  .feature-icon { display: block; width: 44px; height: 44px; margin: 0 auto 20px; color: var(--purple-accent); }
+  .feature-icon path, .feature-icon circle { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .feature-title { font-family: "Inter", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-muted); line-height: 1.6; margin-bottom: 16px; }
+  .feature-body { font-size: 14px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; }
+  @media (max-width: 1200px) {
+    .card-grid > *:not(:nth-child(3n+1)) { border-left: 0; }
+    .card-grid > *:not(:nth-child(2n+1)) { border-left: 1px solid var(--border); }
+  }
+  @media (max-width: 900px) {
+    .card-grid > *, .card-grid > *:not(:nth-child(2n+1)) { border-left: 0; padding: 0; }
+  }
 </style>
 <link rel="icon" type="image/png" href="favicon.png" />
 <link rel="shortcut icon" href="favicon.ico" />
@@ -363,29 +378,34 @@
   
   <div class="card-grid">
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--purple-accent);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Capital Stack Advisory</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">We analyze project economics and capital requirements to recommend the optimal mix of senior debt, mezzanine, preferred equity, and common equity. Balance leverage, dilution, and return targets while advising on recourse trade-offs.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6 42 15 24 24 6 15z"/><path d="M6 24l18 9 18-9"/><path d="M6 33l18 9 18-9"/></svg>
+      <div class="feature-title">Capital Stack Advisory</div>
+      <p class="feature-body">We analyze project economics and capital requirements to recommend the optimal mix of senior debt, mezzanine, preferred equity, and common equity. Balance leverage, dilution, and return targets while advising on recourse trade-offs.</p>
     </div>
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--gold);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Underwriting &amp; Feasibility</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Institutional-grade underwriting and feasibility analysis to validate project assumptions and ensure bankability. Lender-ready models, stress testing for rate and market scenarios, third-party validation.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 6h20l8 8v13"/><path d="M10 6v36h12"/><path d="M29 6v9h9"/><circle cx="31" cy="33" r="8"/><path d="M37 39l6 6"/></svg>
+      <div class="feature-title">Underwriting &amp; Feasibility</div>
+      <p class="feature-body">Institutional-grade underwriting and feasibility analysis to validate project assumptions and ensure bankability. Lender-ready models, stress testing for rate and market scenarios, third-party validation.</p>
     </div>
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--purple-accent);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Deal Packaging</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">We package and present transactions to our capital partner network with the precision institutional lenders require. Executive summaries, sponsor bios, market studies, rent comps, exit strategy documentation, and coordinated outreach.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 16h36v24H6z"/><path d="M6 16 24 6l18 10"/><path d="M6 16l18 10 18-10"/><path d="M24 26v14"/></svg>
+      <div class="feature-title">Deal Packaging</div>
+      <p class="feature-body">We package and present transactions to our capital partner network with the precision institutional lenders require. Executive summaries, sponsor bios, market studies, rent comps, exit strategy documentation, and coordinated outreach.</p>
     </div>
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--gold);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Term Sheet Negotiation</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">From initial term sheets to final loan documents, we represent sponsor interests in structuring and negotiating capital commitments. Term sheet comparison, negotiation of key economic and legal terms, coordination with counsel.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M11 6h18l8 8v28H11z"/><path d="M29 6v9h8"/><path d="M17 22h14m-14 6h14"/><path d="M17 35c4-3 7 2 11-2"/></svg>
+      <div class="feature-title">Term Sheet Negotiation</div>
+      <p class="feature-body">From initial term sheets to final loan documents, we represent sponsor interests in structuring and negotiating capital commitments. Term sheet comparison, negotiation of key economic and legal terms, coordination with counsel.</p>
     </div>
 
-    <div style="padding-top: 16px; border-top: 2px solid var(--purple-accent);">
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Portfolio &amp; Strategy Advisory</div>
-      <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">For sponsors managing multiple assets or seeking growth capital, we provide portfolio-level advisory on recapitalization, refinancing, and strategic capital planning. Portfolio valuation, recap timing, long-term capital partner introductions.</p>
+    <div class="feature">
+      <svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 42h36"/><path d="M12 42V26h7v16m6 0V17h7v25m6 0V9h7v33"/><path d="M6 20l9-8 7 6 12-12"/></svg>
+      <div class="feature-title">Portfolio &amp; Strategy Advisory</div>
+      <p class="feature-body">For sponsors managing multiple assets or seeking growth capital, we provide portfolio-level advisory on recapitalization, refinancing, and strategic capital planning. Portfolio valuation, recap timing, long-term capital partner introductions.</p>
     </div>
 
   </div>
