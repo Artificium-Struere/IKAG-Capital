@@ -6,5 +6,6 @@
 *.ico binary
 *.jpg binary
 *.jpeg binary
+*.mp4 binary
 *.woff binary
 *.woff2 binary
