@@ -58,6 +58,21 @@
   .disc-bar a { color: rgba(255,255,255,0.42); text-decoration: underline; }
   .disc-bar-close { cursor: pointer; margin-left: 12px; font-size: 12px; vertical-align: middle; }
 
+  /* INTRO: the brand film opens the site, with a button straight through to
+     the home page. Desktop only, where phones never fetch the file at all,
+     and never for anyone who has asked for reduced motion. It is hidden by
+     default so that without JavaScript the site is simply the site. */
+  .intro { position: fixed; inset: 0; z-index: 9999;
+           display: flex; flex-direction: column; align-items: center; justify-content: center;
+           gap: 28px; padding: 32px;
+           background: linear-gradient(150deg, var(--purple-deep) 0%, #0D0A20 55%, #12111A 100%); }
+  .intro[hidden] { display: none; }
+  .intro video { display: block; height: min(68vh, 700px); width: auto; max-width: 92vw;
+                 border-radius: 3px; background: #0D0A20;
+                 border: 1px solid rgba(139,92,246,0.28);
+                 box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
+  .intro-enter { border: 0; cursor: pointer; font-family: "Inter", sans-serif; }
+
   /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
@@ -82,12 +97,16 @@
   .nav-cta:hover { background: var(--gold-bright) !important; }
 
   /* HERO */
+  /* The hero and the Gap are one unbroken dark field. The gradient lives on
+     the band wrapping both, rather than on each section, so there is no seam
+     where they meet and the darker end of it carries all the way down. The
+     band exists only to carry that one gradient. */
+  .dark-band { background: linear-gradient(150deg, var(--purple-deep) 0%, #0D0A20 55%, #12111A 100%); }
   #hero {
     min-height: 75vh; display: flex; align-items: center;
-    justify-content: space-between; gap: 56px;
     position: relative; overflow: hidden;
     padding: 60px 5% 48px;
-    background: linear-gradient(135deg, var(--purple-deep) 0%, #0D0A20 60%, #12111A 100%);
+    background: transparent;
   }
   .hero-rule { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), var(--purple-bright), transparent); opacity: 0.5; }
   .hero-orb { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; animation: drift 16s ease-in-out infinite alternate; }
@@ -97,21 +116,6 @@
   @keyframes drift { 0% { transform: translate(0,0); } 100% { transform: translate(24px,-18px); } }
 
   .hero-content { position: relative; z-index: 2; max-width: 820px; }
-
-  /* the brand reel sits beside the copy. The footage is 9:16, so it is sized
-     by height and lets its width follow, rather than being cropped into a
-     landscape box: every shot in it is composed vertically. It is silent, so
-     it autoplays muted and loops as a visual rather than something to watch. */
-  .hero-video { position: relative; z-index: 2; flex: 0 0 auto;
-                height: min(600px, 60vh); aspect-ratio: 9 / 16;
-                border-radius: 3px; overflow: hidden;
-                border: 1px solid rgba(139,92,246,0.28);
-                box-shadow: 0 30px 80px rgba(0,0,0,0.45); }
-  .hero-video video { display: block; width: 100%; height: 100%; object-fit: cover; }
-  @media (max-width: 1100px) {
-    #hero { flex-direction: column; align-items: flex-start; gap: 40px; }
-    .hero-video { height: auto; width: min(300px, 72vw); }
-  }
 
   .hero-badge {
     display: inline-flex; align-items: center; gap: 10px;
@@ -158,7 +162,7 @@
   .what-card-desc { font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.7; }
 
   /* NETWORK */
-  #network { background: var(--purple-deep); padding: 44px 5%; position: relative; overflow: hidden; }
+  #network { background: transparent; padding: 20px 5% 64px; position: relative; overflow: hidden; }
   #network::before { content: ""; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(196,151,42,0.1) 0%, transparent 65%); pointer-events: none; }
   .network-inner { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; }
   .network-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 12px; }
@@ -363,6 +367,12 @@
 <link rel="apple-touch-icon" href="favicon.png" />
 </head>
 <body>
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="IKAG Capital intro" hidden>
+  <video id="intro-video" data-src="ikag-hero.mp4" poster="ikag-hero-poster.jpg"
+         muted playsinline preload="none" aria-label="IKAG Capital brand film"></video>
+  <button type="button" class="btn-primary intro-enter" id="intro-enter">Enter Site</button>
+</div>
+
 
 <!-- DISCLAIMER BAR -->
 <div class="disc-bar" id="disc-bar">
@@ -391,6 +401,7 @@
 </nav>
 
 
+<div class="dark-band">
 <section id="hero">
   <div class="hero-rule"></div>
   <div class="hero-orb orb-1"></div>
@@ -406,11 +417,6 @@
       <a href="#what" class="btn-ghost-light">How It Works</a>
     </div>
   </div>
-  <div class="hero-video">
-    <video src="ikag-hero.mp4" poster="ikag-hero-poster.jpg"
-           autoplay muted loop playsinline preload="metadata"
-           aria-label="IKAG Capital brand film"></video>
-  </div>
 </section>
 
 <section id="network">
@@ -420,6 +426,7 @@
     <p class="network-sub">Middle market and emerging investors are the backbone of commercial real estate. They bring transactions the institutional capital markets should be underwriting, but the big shops rarely take their call. IKAG makes the call for them. Every deal that comes through us enters an advisory partner network with the relationships, infrastructure, and execution to move it from packaging to close.</p>
   </div>
 </section>
+</div>
 
 <!-- SERVICES OVERVIEW -->
 <section style="background: var(--bg); padding: 48px 5%;">
@@ -517,22 +524,41 @@
   }, { threshold: 0.1 });
   document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 
-  // The hero reel is silent decoration. It holds on its poster frame for anyone
-  // whose system asks for reduced motion, and otherwise only runs while it is
-  // actually on screen, so it is not decoding frames behind the rest of the page.
-  const heroVideo = document.querySelector(".hero-video video");
-  if (heroVideo) {
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      heroVideo.removeAttribute("autoplay");
-      heroVideo.pause();
-    } else {
-      new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { heroVideo.play().catch(() => {}); } else { heroVideo.pause(); }
-        });
-      }, { threshold: 0.15 }).observe(heroVideo);
+  // The brand film opens the site once per visit. The source is only attached
+  // when it is actually going to play, so a phone never downloads it.
+  (function () {
+    const intro = document.getElementById("intro");
+    const video = document.getElementById("intro-video");
+    const enter = document.getElementById("intro-enter");
+    if (!intro || !video || !enter) return;
+
+    const mq = window.matchMedia;
+    const wideEnough = mq && mq("(min-width: 1024px)").matches;
+    const reduced = mq && mq("(prefers-reduced-motion: reduce)").matches;
+    let seen = false;
+    try { seen = sessionStorage.getItem("ikagIntroSeen") === "1"; } catch (e) {}
+    if (!wideEnough || reduced || seen) return;
+
+    function close() {
+      intro.hidden = true;
+      document.documentElement.style.overflow = "";
+      video.pause();
+      document.removeEventListener("keydown", onKey);
     }
-  }
+    function onKey(e) { if (e.key === "Escape") close(); }
+
+    try { sessionStorage.setItem("ikagIntroSeen", "1"); } catch (e) {}
+    video.src = video.getAttribute("data-src");
+    intro.hidden = false;
+    document.documentElement.style.overflow = "hidden";
+    document.addEventListener("keydown", onKey);
+    enter.addEventListener("click", close);
+    video.addEventListener("ended", close);
+    // if playback will not start, do not strand anyone on a still frame
+    const started = video.play();
+    if (started && started.catch) started.catch(close);
+    enter.focus();
+  })();
 </script>
 </body>
 </html>

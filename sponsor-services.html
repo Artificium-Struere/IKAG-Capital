@@ -308,6 +308,13 @@
     .nav-links li:last-child a { border-bottom: none; }
     .nav-cta { display: block; text-align: center; margin-top: 14px; padding: 13px 18px !important; font-size: 12px !important; border-radius: 2px; }
   }
+
+  /* Sponsor services: three across with no panels, so a short last row simply
+     ends instead of leaving an empty box where a card would have been. An
+     auto-fit track count opened a fourth, dead column on wide screens. */
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 56px; margin-top: 36px; }
+  @media (max-width: 1100px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 760px) { .svc-grid { grid-template-columns: 1fr; } }
 </style>
 <link rel="icon" type="image/png" href="favicon.png" />
 <link rel="shortcut icon" href="favicon.ico" />
@@ -351,21 +358,21 @@
     <p style="font-size: 16px; font-weight: 300; color: rgba(247,244,238,0.65); max-width: 640px; line-height: 1.75;">Institutional-grade deal preparation for real estate sponsors. When you need a targeted deliverable or ongoing deal team support, we operate as an integrated extension of your investment platform.</p>
   </div>
 </section>
-<section id="sponsor-services" style="background: var(--bg-card);">
+<section id="sponsor-services" style="background: var(--bg);">
   
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; margin-top: 32px; background: var(--border);">
+  <div class="svc-grid">
 
-    <div style="background: var(--bg); padding: 28px 24px; border-top: 2px solid var(--purple-accent);">
+    <div>
       <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Fractional Deal Team</div>
       <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Embedded, on-demand execution support for underwriting, investment analysis, and capital raise initiatives. Investment team expertise without the cost, complexity, or long-term commitment of full-time employees.</p>
     </div>
 
-    <div style="background: var(--bg); padding: 28px 24px; border-top: 2px solid var(--gold);">
+    <div>
       <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Financial Modeling</div>
       <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Dynamic, institutional-grade financial models providing the clarity and rigor needed to support acquisitions, developments, repositionings, and capital raises. Tailored, audit-ready, built to drive confident investment decisions.</p>
     </div>
 
-    <div style="background: var(--bg); padding: 28px 24px; border-top: 2px solid var(--purple-accent);">
+    <div>
       <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">Presentation Services</div>
       <p style="font-size: 13px; font-weight: 300; color: var(--text-secondary); line-height: 1.75;">Investor-ready presentations that clearly articulate complex investment opportunities. From offering memorandums to capital raise pitchbooks, materials built to secure buy-in from lenders, partners, and equity investors.</p>
     </div>
