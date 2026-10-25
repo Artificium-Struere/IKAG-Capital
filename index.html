@@ -101,7 +101,18 @@
      the band wrapping both, rather than on each section, so there is no seam
      where they meet and the darker end of it carries all the way down. The
      band exists only to carry that one gradient. */
-  .dark-band { background: linear-gradient(150deg, var(--purple-deep) 0%, #0D0A20 55%, #12111A 100%); }
+  .dark-band { background: linear-gradient(150deg, var(--purple-deep) 0%, #0D0A20 55%, #12111A 100%);
+               position: relative; overflow: hidden; }
+  /* The warm glow belongs to the whole band. It used to sit on the Gap section,
+     whose overflow clip sliced it flat along the section's top edge and drew a
+     hard line across the band. Here nothing crops it vertically, and the blur
+     plus the softer falloff let it fade out instead of ending. */
+  .dark-band::before { content: ""; position: absolute; z-index: 0; pointer-events: none;
+                       top: 12%; right: -180px; width: 760px; height: 760px;
+                       background: radial-gradient(circle, rgba(196,151,42,0.085) 0%,
+                                                           rgba(196,151,42,0.035) 40%,
+                                                           transparent 72%);
+                       filter: blur(80px); }
   #hero {
     min-height: 75vh; display: flex; align-items: center;
     position: relative; overflow: hidden;
@@ -163,7 +174,6 @@
 
   /* NETWORK */
   #network { background: transparent; padding: 20px 5% 64px; position: relative; overflow: hidden; }
-  #network::before { content: ""; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(196,151,42,0.1) 0%, transparent 65%); pointer-events: none; }
   .network-inner { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; }
   .network-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-muted); margin-bottom: 12px; }
   .network-headline { font-family: "Plus Jakarta Sans", sans-serif; font-size: clamp(24px, 3.2vw, 40px); font-weight: 700; color: #F7F4EE; margin-bottom: 20px; line-height: 1.15; letter-spacing: -0.02em; }
