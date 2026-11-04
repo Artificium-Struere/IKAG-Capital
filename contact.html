@@ -396,6 +396,10 @@
 
     <div>
       <form id="deal-form" action="https://script.google.com/macros/s/AKfycbxUo7xknwFyCSt07JdqpXZtEoc-1mzbcULqMHYFSNaibaJ2IT4EvB6boXtEZFwQQ_MG2A/exec" method="POST" target="ikag_sink" novalidate>
+        <!-- anti-spam: token + render time set by JS; "website" is a honeypot humans never see -->
+        <input type="hidden" name="_tk" value="" />
+        <input type="hidden" name="_ts" value="" />
+        <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" value="" /></label></div>
         <input type="hidden" name="formType" value="deal-submission" />
         <div class="field">
           <label for="d-name">Name</label>
@@ -535,6 +539,17 @@
       if (!validate()) { ev.preventDefault(); return; }
       form.style.display = "none";
       panel.style.display = "block";
+    });
+  })();
+</script>
+<script>
+  /* IKAG anti-spam: must match SEC.FORM_TOKEN in apps-script/Code.gs */
+  (function () {
+    var IKAG_FORM_TOKEN = ["ikag", "fv1", "7Hq2Lm9X"].join("-");
+    var t = String(Date.now());
+    Array.prototype.forEach.call(document.querySelectorAll("form"), function (f) {
+      if (f.elements["_tk"]) f.elements["_tk"].value = IKAG_FORM_TOKEN;
+      if (f.elements["_ts"]) f.elements["_ts"].value = t;
     });
   })();
 </script>

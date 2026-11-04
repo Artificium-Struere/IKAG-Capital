@@ -23,6 +23,72 @@ var NOTIFY_EMAIL  = 'contact@ikag.capital';
 var IKAG_PHONE    = '(866) 778-1354';
 var PHOTO_ROOT    = 'IKAG Listing Photos';
 
+/* Names/emails that never create deal rows or alert emails (junk / abuse).
+ * Match is case-insensitive substring across name, email, company, and related fields.
+ * Submissions are still logged to All Submissions as BLOCKED so we have a record.
+ */
+var BLOCKED_SUBMITTERS = [
+  'robertshofe',
+  'robert shofe',
+  'robert.shofe',
+  'xmnoqznp@formtests.info',
+  'spkbgd@1win.xyz',
+  // 2026-11-04 casino / "$3,222" spam flood on unsecured-referral
+  '1win.xyz', '1win.com', 'go-bv.php', 'go-na.php', 'bonus balance',
+  '$3,222', 'promo code', 'bonus code', 'zero deposit', 'no deposit needed',
+  'hs=51c603359b7b61aaa2493fce921d47b4', 'hs=a365fe9aa69c61075327eb6fafdabfe0',
+  'bgg~671lbkbz0p7mt7ywd',
+  'dragueopr.net', 'jetroom.ru', 'rdccii.com', 'darejeans.com', 'fretigo.com',
+  'drive-piscine.fr', 'recrootixsolution.com', 'a711lions.org', 'kodomoji.com',
+  'reelshub.ru', 'neastar.ru', 'hosomi-kogyo.co.jp', 'meghahpl.com',
+  'advodocs.ru', 'toomat.ru', 'drkaze.ru', 'apollobulk.com', 'demolinkace.com',
+  // older non-casino junk on deal-submission
+  'mickeybrent', 'narcolog', 'formtests.info'
+];
+
+/* ------------------------------------------------------- anti-spam config
+ * See SECURITY-PARAMETERS.md at the repo root for what each one does and
+ * how to tune it. Every rejection returns the same silent "ok" so a bot
+ * cannot tell which rule caught it.
+ */
+var SEC = {
+  FORM_TOKEN:        'ikag-fv1-7Hq2Lm9X',  // must match IKAG_FORM_TOKEN in the site pages
+  REQUIRE_TOKEN:     true,                 // false = log-only for the token/timestamp checks
+  HONEYPOT_FIELD:    'website',            // hidden input; humans leave it empty
+  MIN_FILL_MS:       3000,                 // faster than 3 s from page render = bot
+  MAX_AGE_MS:        24 * 3600 * 1000,     // form rendered more than 24 h ago = stale/replayed
+  PER_EMAIL_PER_HOUR: 5,                   // same email, any form
+  GLOBAL_PER_MINUTE: 20,                   // all forms combined; excess dropped silently
+  GLOBAL_PER_HOUR:   120,
+  MAX_NAME_LEN:      120,                  // name / company / short fields
+  MAX_TEXT_LEN:      5000,                 // notes / summary / description / trackRecord
+  MAX_LINKS_ANY_FIELD: 1,                  // more than this many links in one field = reject
+  MAX_NON_ASCII_RATIO: 0.30,               // share of non-ASCII chars in all text
+  REJECT_LOG_PER_HOUR: 25,                 // cap on BLOCKED rows written to All Submissions
+  ERROR_LOG_PER_HOUR:  30,                 // cap on rows written to Errors
+  MAX_SUBJECT_LEN:   180                   // Gmail rejects very long subjects
+};
+
+var SHORT_FIELDS_ = ['name', 'fullName', 'clientName', 'repName', 'company', 'entity',
+                     'clientCompany', 'ikagRep', 'reason', 'assetType', 'location',
+                     'capitalType', 'capitalAmount', 'city', 'state', 'role',
+                     'category', 'propertyType', 'listingId', 'phone', 'clientPhone',
+                     'email', 'repEmail'];
+var NAME_FIELDS_  = ['name', 'fullName', 'clientName', 'repName', 'company', 'entity',
+                     'clientCompany', 'ikagRep'];
+var LONG_FIELDS_  = ['notes', 'summary', 'description', 'trackRecord', 'address'];
+
+/* Fields the real site never sends. The 2026 casino bot posts `referralPartner`
+ * (from an old form layout), so its presence alone marks a bot. */
+var FOREIGN_FIELDS_ = ['referralPartner'];
+
+var SPAM_RE_ = /(\* \* \*|go-[a-z]{2}\.php|promo ?code|bonus code|bonus account|bonus balance|welcome bonus|casino|slot machine|slot players|free spins|jackpot|no deposit|zero deposit|1win|crypto giveaway|viagra|cialis|narcolog|seo services|backlinks)/i;
+
+var DISPOSABLE_DOMAINS_ = ['formtests.info', 'mailinator.com', 'guerrillamail.com', 'sharklasers.com',
+  '10minutemail.com', 'temp-mail.org', 'tempmail.com', 'yopmail.com', 'trashmail.com',
+  'getnada.com', 'dispostable.com', 'maildrop.cc', 'throwawaymail.com', 'fakeinbox.com',
+  'mohmal.com', 'emailondeck.com', 'mintemail.com', '1win.xyz'];
+
 var TAB_ALL       = 'All Submissions';
 var TAB_REFERRALS = 'Unsecured Referrals';
 var TAB_DEALS     = 'Deal Submissions';
@@ -133,6 +199,19 @@ function publicListings_() {
   return out;
 }
 
+
+function isBlockedSubmitter_(p) {
+  var hay = [
+    p.name, p.fullName, p.clientName, p.repName, p.email, p.repEmail,
+    p.company, p.entity, p.clientCompany,
+    p.notes, p.reason, p.summary, p.referralPartner, p.ikagRep
+  ].join(' ').toLowerCase();
+  for (var i = 0; i < BLOCKED_SUBMITTERS.length; i++) {
+    if (hay.indexOf(BLOCKED_SUBMITTERS[i].toLowerCase()) !== -1) return true;
+  }
+  return false;
+}
+
 /* ------------------------------------------------------------------ doPost */
 
 /**
@@ -142,7 +221,20 @@ function publicListings_() {
  */
 function doPost(e) {
   var p = params_(e);
-  var kind = p.type || p.formType || 'unknown';
+  var kind = String(p.type || p.formType || 'unknown').slice(0, 40);
+  var why = '';
+  try { why = screen_(p, kind); } catch (err) { why = 'screen-error'; }
+
+  if (why) {
+    // Silent OK: no data row, no email, no Errors row. Log a capped sample only.
+    if (underCap_('rejlog', SEC.REJECT_LOG_PER_HOUR, 3600)) {
+      try {
+        logRow_(TAB_ALL, [new Date(), 'BLOCKED ' + kind + ' [' + why + ']',
+                          truncate_(JSON.stringify(scrub_(p)), 2000)]);
+      } catch (ignored) {}
+    }
+    return ok_();
+  }
 
   try {
     logRow_(TAB_ALL, [new Date(), 'POST ' + kind, truncate_(JSON.stringify(scrub_(p)), 45000)]);
@@ -159,6 +251,112 @@ function doPost(e) {
     return json_({ ok: false, error: String(err) });
   }
 }
+
+/* -------------------------------------------------------------- screening */
+
+/** Returns '' to accept, or a short reason code to drop silently. */
+function screen_(p, kind) {
+  var KNOWN = ['listing', 'inquiry', 'unsecured-referral', 'deal-submission'];
+  if (KNOWN.indexOf(kind) === -1) return 'unknown-kind';
+
+  // 1. Honeypot
+  if (String(p[SEC.HONEYPOT_FIELD] || '').trim() !== '') return 'honeypot';
+
+  // 2. Token + render timestamp (only real pages running our JS have these)
+  if (SEC.REQUIRE_TOKEN) {
+    if (String(p._tk || '') !== SEC.FORM_TOKEN) return 'token';
+    var ts = parseInt(p._ts, 10), age = Date.now() - ts;
+    if (!ts || isNaN(age)) return 'no-ts';
+    if (age < SEC.MIN_FILL_MS) return 'too-fast';
+    if (age > SEC.MAX_AGE_MS) return 'stale';
+  }
+
+  // 3. Fields our forms never send
+  for (var f = 0; f < FOREIGN_FIELDS_.length; f++) {
+    if (p[FOREIGN_FIELDS_[f]] !== undefined) return 'foreign-field';
+  }
+
+  // 4. Explicit blocklist
+  if (isBlockedSubmitter_(p)) return 'blocklist';
+
+  // 5. Lengths, links, HTML
+  var all = [];
+  var i, k, v;
+  for (i = 0; i < SHORT_FIELDS_.length; i++) {
+    v = str_(p[SHORT_FIELDS_[i]]);
+    if (v.length > SEC.MAX_NAME_LEN) return 'too-long';
+    all.push(v);
+  }
+  for (i = 0; i < LONG_FIELDS_.length; i++) {
+    v = str_(p[LONG_FIELDS_[i]]);
+    if (v.length > SEC.MAX_TEXT_LEN) return 'too-long';
+    all.push(v);
+  }
+  for (i = 0; i < NAME_FIELDS_.length; i++) {
+    v = str_(p[NAME_FIELDS_[i]]);
+    if (/https?:|www\.|<[a-z\/!]|\[url|\.(ru|xyz|php)\b/i.test(v)) return 'link-in-name';
+    if (/[\u2600-\u27BF]|[\uD83C-\uDBFF][\uDC00-\uDFFF]/.test(v)) return 'emoji-in-name';
+  }
+  for (i = 0; i < all.length; i++) {
+    var links = (all[i].match(/https?:\/\/|www\./gi) || []).length;
+    if (links > SEC.MAX_LINKS_ANY_FIELD) return 'links';
+    if (/<\s*(a|script|iframe|img)\b/i.test(all[i])) return 'html';
+  }
+
+  // 6. Content patterns
+  var text = all.join(' ');
+  if (SPAM_RE_.test(text)) return 'keywords';
+  if (text.replace(/\s/g, '').length > 20) {
+    var non = (text.match(/[^\x00-\x7F]/g) || []).length;
+    if (non / text.length > SEC.MAX_NON_ASCII_RATIO) return 'non-ascii';
+  }
+  // Bot filler: 3+ fields that are 5-8 chars of mixed lowercase letters and digits ("8xcfzb", "4tcew9")
+  var junk = 0;
+  for (k in p) {
+    v = str_(p[k]);
+    if (/^[a-z0-9]{5,8}$/.test(v) && /[a-z]/.test(v) && /[0-9]/.test(v)) junk++;
+  }
+  if (junk >= 3) return 'random-filler';
+
+  // 7. Email / phone formats
+  var email = str_(p.email || p.repEmail);
+  if (!/^[^@\s<>]+@[^@\s<>]+\.[a-z]{2,24}$/i.test(email)) return 'email-format';
+  var dom = email.split('@')[1] ? email.split('@')[1].toLowerCase() : '';
+  if (dom && DISPOSABLE_DOMAINS_.indexOf(dom) !== -1) return 'disposable';
+  var phones = [p.phone, p.clientPhone];
+  for (i = 0; i < phones.length; i++) {
+    if (phones[i] === undefined || str_(phones[i]) === '') continue;
+    var ph = str_(phones[i]);
+    if (!/^[0-9+().\-\s x]+$/i.test(ph)) return 'phone-format';
+    var d = ph.replace(/\D/g, '').length;
+    if (d < 7 || d > 15) return 'phone-format';
+  }
+
+  // 8. Rate limits (last, so junk never burns the legit budget)
+  if (email && !underCap_('em:' + email.toLowerCase(), SEC.PER_EMAIL_PER_HOUR, 3600)) return 'rate-email';
+  if (!underCap_('g:min', SEC.GLOBAL_PER_MINUTE, 60)) return 'rate-global';
+  if (!underCap_('g:hr', SEC.GLOBAL_PER_HOUR, 3600)) return 'rate-global-hr';
+  return '';
+}
+
+/** Counts hits on `key` in CacheService; true while count <= max in the window. */
+function underCap_(key, max, ttlSec) {
+  var cache = CacheService.getScriptCache();
+  var lock  = LockService.getScriptLock();
+  var got = false;
+  try { got = lock.tryLock(3000); } catch (ignored) {}
+  try {
+    var bucket = Math.floor(Date.now() / (ttlSec * 1000));
+    var ck = 'rl:' + key + ':' + bucket;
+    var n = parseInt(cache.get(ck) || '0', 10) + 1;
+    cache.put(ck, String(n), ttlSec + 5);
+    return n <= max;
+  } finally {
+    if (got) lock.releaseLock();
+  }
+}
+
+function str_(v) { return String(v == null ? '' : v).trim(); }
 
 /* --------------------------------------------------------------- listings */
 
@@ -351,6 +549,9 @@ function handleDeal_(p) {
  * shape MailApp.sendEmail does: {to, subject, body, replyTo?, htmlBody?, name?}.
  */
 function notify_(msg) {
+  // anti-spam: one-line, length-capped subject (Gmail throws "argument too large: subject")
+  msg.subject = String(msg.subject || '').replace(/[\r\n]+/g, ' ');
+  if (msg.subject.length > SEC.MAX_SUBJECT_LEN) msg.subject = msg.subject.slice(0, SEC.MAX_SUBJECT_LEN - 1) + '…';
   var opts = {};
   if (msg.replyTo)  opts.replyTo  = msg.replyTo;
   if (msg.htmlBody) opts.htmlBody = msg.htmlBody;
@@ -404,8 +605,9 @@ function logRow_(name, values) {
 }
 
 function logError_(err, ctx) {
+  if (!underCap_('errlog', SEC.ERROR_LOG_PER_HOUR, 3600)) return;   // a flood can't fill the sheet
   try {
-    logRow_(TAB_ERRORS, [new Date(), String(err), truncate_(JSON.stringify(scrub_(ctx || {})), 45000)]);
+    logRow_(TAB_ERRORS, [new Date(), String(err), truncate_(JSON.stringify(scrub_(ctx || {})), 4000)]);
   } catch (ignored) {}
 }
 

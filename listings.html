@@ -511,6 +511,10 @@
     </div>
 
     <form id="inq-form" novalidate>
+      <!-- anti-spam: token + render time set by JS; "website" is a honeypot humans never see -->
+      <input type="hidden" name="_tk" value="" />
+      <input type="hidden" name="_ts" value="" />
+      <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" value="" /></label></div>
       <input type="hidden" name="listingId" id="inq-listing-id" />
       <div class="field">
         <label for="inq-name">Full Name</label>
@@ -841,6 +845,9 @@
       var place = document.getElementById("inq-prop-text").textContent;
       var body  = {
         type: "inquiry",
+        _tk:         form.elements["_tk"].value,
+        _ts:         form.elements["_ts"].value,
+        website:     form.elements["website"].value,
         listingId:   document.getElementById("inq-listing-id").value,
         fullName:    name,
         email:       document.getElementById("inq-email").value.trim(),
@@ -884,6 +891,17 @@
     });
 
     load();
+  })();
+</script>
+<script>
+  /* IKAG anti-spam: must match SEC.FORM_TOKEN in apps-script/Code.gs */
+  (function () {
+    var IKAG_FORM_TOKEN = ["ikag", "fv1", "7Hq2Lm9X"].join("-");
+    var t = String(Date.now());
+    Array.prototype.forEach.call(document.querySelectorAll("form"), function (f) {
+      if (f.elements["_tk"]) f.elements["_tk"].value = IKAG_FORM_TOKEN;
+      if (f.elements["_ts"]) f.elements["_ts"].value = t;
+    });
   })();
 </script>
 </body>
