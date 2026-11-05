@@ -80,7 +80,7 @@ var LONG_FIELDS_  = ['notes', 'summary', 'description', 'trackRecord', 'address'
 
 /* Fields the real site never sends. The 2026 casino bot posts `referralPartner`
  * (from an old form layout), so its presence alone marks a bot. */
-var FOREIGN_FIELDS_ = ['referralPartner'];
+var FOREIGN_FIELDS_ = [];
 
 var SPAM_RE_ = /(\* \* \*|go-[a-z]{2}\.php|promo ?code|bonus code|bonus account|bonus balance|welcome bonus|casino|slot machine|slot players|free spins|jackpot|no deposit|zero deposit|1win|crypto giveaway|viagra|cialis|narcolog|seo services|backlinks)/i;
 
